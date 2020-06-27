@@ -50,6 +50,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="dateEntry_get_act:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="fnp-Hp-PRy"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -300,7 +303,7 @@
                         <outlet property="lastMonthTimeStampLabel" destination="5RM-0o-CWE" id="Mh3-bg-hs0"/>
                         <outlet property="lastweekLabel" destination="T1M-BH-8ft" id="e0y-42-RgR"/>
                         <outlet property="next30minLabel" destination="B7h-G5-TG1" id="Imo-V1-QiQ"/>
-                        <outlet property="nextMonthLabel" destination="szl-Qm-mlf" id="87o-Gj-eVA"/>
+                        <outlet property="nextMonthLabel" destination="1J5-1f-x4V" id="vDX-yq-kqY"/>
                         <outlet property="nextweekLabel" destination="uKX-ha-LXb" id="vmA-hT-Ghh"/>
                         <outlet property="nextweekTimeStampLabel" destination="vbR-LI-YUM" id="Ltg-8t-uOM"/>
                         <outlet property="nowLabel" destination="Xag-eW-Ndi" id="nfs-T7-PcM"/>

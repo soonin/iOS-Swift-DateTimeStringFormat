@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let datePicker = UIDatePicker()
+    var activeDateField : UITextField!
+    
     @IBOutlet weak var updateBtn: UIButton!
     @IBOutlet weak var entryDate: UITextField!
     @IBOutlet weak var inputFormat: UITextField!
@@ -32,14 +35,48 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.entryDate.text = today.toString(toFromat: "yyyy-MM-dd HH:mm:ss")
         self.inputFormat.text = "yyyy-MM-dd HH:mm:ss"
         self.outputFormat.text = "dd-MMM-yyyy HH:mm:ss"
+        self.entryDate.text = today.toString(toFromat: self.inputFormat.text ?? "")
         
         update()
 
     }
 
+    
+    func showDatePicker()  {
+        //Formate Date
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.date = activeDateField.text?.toDate(byFormat: self.inputFormat.text ?? "yyyy-MM-dd HH:mm:ss") ?? Date()
+        //Tollbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Calcel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        activeDateField.inputAccessoryView = toolbar
+        activeDateField.inputView = datePicker
+    }
+    
+    @IBAction func doneDatePicker()  {
+        let formatter = DateFormatter()
+        formatter.dateFormat = self.inputFormat.text ?? "yyyy-MM-dd HH:mm:ss"
+        activeDateField.text = formatter.string(from: datePicker.date)
+        update()
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func cancelDatePicker()  {
+        self.view.endEditing(true)
+    }
+
+    @IBAction func dateEntry_get_act(_ sender : Any){
+        activeDateField = entryDate
+        showDatePicker()
+    }
+    
     
     @IBAction func update_act(_ sender:Any){
         update()
